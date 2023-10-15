@@ -24,14 +24,27 @@
 
 <br/><br/><br/><br/>
 
+<form [formGroup]="signUpForm">
 <mat-card class="mat-card-page">
     <mat-card-title>Register</mat-card-title>
   
     <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Your name" [(ngModel)]="registerDto.name">
+      <input matInput placeholder="Your name" [(ngModel)]="registerDto.name" formControlName="Name">
     </mat-form-field>
-  
+    <div
+        *ngIf="signUpForm.controls.Name.invalid && (signUpForm.controls.Name.dirty || signUpForm.controls.Name.touched)"
+    >
+        <div *ngIf="signUpForm.controls.Name.errors && signUpForm.controls.Name.errors['required']">
+        Name is required.
+        </div>
+        <div *ngIf="signUpForm.controls.Name.errors && signUpForm.controls.Name.errors['minlength']">
+        Name must be at least 5 characters long.
+        </div>
+        <br><br>
+    </div>
+
+
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input matInput placeholder="Your email" [(ngModel)]="registerDto.email">
@@ -39,9 +52,15 @@
   
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Your password" [(ngModel)]="registerDto.password">
+      <input matInput placeholder="Your password" [(ngModel)]="registerDto.password" type="password">
     </mat-form-field>
   
+    <mat-form-field class="example-full-width">
+        <mat-label>Password Repeated</mat-label>
+        <input matInput placeholder="Password Again" type="password">
+      </mat-form-field>
+
     <button mat-raised-button color="primary" (click)="Register(registerDto)">Register</button>
   
   </mat-card>
+</form>

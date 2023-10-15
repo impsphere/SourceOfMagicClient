@@ -3,6 +3,8 @@ import { Login } from '../../Models/login';
 import { Register } from '../../Models/register';
 import { jwtAuth } from '../../Models/jwtAuth';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Validators } from "@angular/forms";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-login-reg',
@@ -27,6 +29,12 @@ export class LoginRegComponent {
     });
   }
 
+  signUpForm = new FormGroup({
+    Name: new FormControl("", [
+      Validators.required,
+      Validators.minLength(5)
+    ])
+  })
 
 
 }
