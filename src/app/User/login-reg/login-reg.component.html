@@ -47,20 +47,60 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Your email" [(ngModel)]="registerDto.email">
+      <input matInput placeholder="Your email" [(ngModel)]="registerDto.email" formControlName="Email">
     </mat-form-field>
+    <div
+    *ngIf="signUpForm.controls.Email.invalid && (signUpForm.controls.Email.dirty || signUpForm.controls.Email.touched)"
+    >
+        <div *ngIf="signUpForm.controls.Email.errors && signUpForm.controls.Email.errors['required']">
+        Email is required.
+        </div>
+        <div *ngIf="signUpForm.controls.Email.errors && signUpForm.controls.Email.errors['email']">
+        Email must be properly formatted.
+        </div>
+        <br><br>
+    </div>
   
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Your password" [(ngModel)]="registerDto.password" type="password">
+      <input matInput placeholder="Your password" [(ngModel)]="registerDto.password" type="password" formControlName="Password">
     </mat-form-field>
+    <div
+    *ngIf="signUpForm.controls.Password.invalid && (signUpForm.controls.Password.dirty || signUpForm.controls.Password.touched)"
+    >
+        <div *ngIf="signUpForm.controls.Password.errors && signUpForm.controls.Password.errors['required']">
+            Password is required.
+        </div>
+        <div *ngIf="signUpForm.controls.Password.errors && signUpForm.controls.Password.errors['pattern']">
+            Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&).
+        </div>
+        <br><br>
+    </div>
   
     <mat-form-field class="example-full-width">
         <mat-label>Password Repeated</mat-label>
-        <input matInput placeholder="Password Again" type="password">
-      </mat-form-field>
+        <input matInput placeholder="Password repeated" type="password" formControlName="PasswordRepeated">
+    </mat-form-field>
+    <div
+    *ngIf="signUpForm.controls.PasswordRepeated.invalid && (signUpForm.controls.PasswordRepeated.dirty || signUpForm.controls.PasswordRepeated.touched)"
+    >
+        <div *ngIf="signUpForm.controls.PasswordRepeated.errors && signUpForm.controls.PasswordRepeated.errors['required']">
+            Password Repeated is required.
+        </div>
+        <div *ngIf="signUpForm.controls.PasswordRepeated.errors && signUpForm.controls.PasswordRepeated.errors['pattern']">
+            Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&).
+        </div>
+        <br><br>
+    </div>
 
-    <button mat-raised-button color="primary" (click)="Register(registerDto)">Register</button>
+    <!--button mat-raised-button color="primary" (click)="Register(registerDto)">Register</button-->
   
+    <div *ngIf="signUpForm.errors?.['notmatched'] && (signUpForm.touched || signUpForm.dirty)" class="cross-validation-error-message alert alert-danger">
+        Passwords do not match.
+        <br><br>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid" (click)="Register(registerDto)">Submit Profile</button>
+
   </mat-card>
 </form>
