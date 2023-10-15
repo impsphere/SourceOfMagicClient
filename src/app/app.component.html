@@ -84,56 +84,14 @@
 </style>
 
 <mat-card>
-  <mat-card-title>Source Of Magic</mat-card-title>
-  <mat-card-subtitle>Login/Registration</mat-card-subtitle>            
+  <mat-card-title>Source Of Mecha</mat-card-title>
 </mat-card>
 
 <div class="content" role="main">
 
   <br/><br/><br/><br/>
 
-<mat-card class="mat-card-page">
-  <mat-card-title>Register</mat-card-title>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Your name" [(ngModel)]="registerDto.name">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Your email" [(ngModel)]="registerDto.email">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Your password" [(ngModel)]="registerDto.password">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="Register(registerDto)">Register</button>
-
-</mat-card>
-
-<br/><br/><br/><br/>
-
-<mat-card class="mat-card-page">
-  <mat-card-title>Login</mat-card-title>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Your email" [(ngModel)]="loginDto.email">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Your password" [(ngModel)]="loginDto.password">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="Login(loginDto)">Login</button>
-
-</mat-card>
-
-
+  <app-login-reg></app-login-reg>
 
   <hr>
   <br/><br/><br/><br/>

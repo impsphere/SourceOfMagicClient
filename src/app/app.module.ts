@@ -15,10 +15,12 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginRegComponent } from './User/login-reg/login-reg.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginRegComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     useClass: AuthenticationInterceptor,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+    LoginRegComponent
+  ]
 })
 export class AppModule { }

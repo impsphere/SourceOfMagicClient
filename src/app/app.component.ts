@@ -12,27 +12,13 @@ import { MatLabel } from '@angular/material/form-field';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Drivers.app';
-  loginDto = new Login();
-  registerDto = new Register();
-  jwtDto = new jwtAuth;
+  title = 'Source of Mecha';
 
   constructor(private authService: AuthenticationService){}
-
-  Register(registerDto: Register) {
-    this.authService.register(registerDto).subscribe();
-  }
-
-  Login(loginDto: Login) {
-    this.authService.login(loginDto).subscribe((jwtDto) => {
-      localStorage.setItem('jwtToken', jwtDto.token);
-    });
-  }
-
+  
   GetWeather() {
     this.authService.getWeather().subscribe((weatherdata:any) => {
       console.log(weatherdata);
     });
   }
-
 }
