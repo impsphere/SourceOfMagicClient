@@ -17,10 +17,19 @@ export class LoginRegComponent {
   registerDto = new Register();
   jwtDto = new jwtAuth;
 
+  public _RegistrationComplete = false;
+
+  get RegistrationComplete(): boolean {
+    return this._RegistrationComplete;
+  }
+
   constructor(private authService: AuthenticationService){}
 
   Register(registerDto: Register) {
     this.authService.register(registerDto).subscribe();
+    // Give the user a success message and clear out the DTO objeect so the screen clears
+    this._RegistrationComplete = true;
+    this.signUpForm.reset();
   }
 
   Login(loginDto: Login) {
