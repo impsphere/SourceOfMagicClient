@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Validators, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 
+
 @Component({
   selector: 'app-login-reg',
   templateUrl: './login-reg.component.html',
@@ -16,6 +17,7 @@ export class LoginRegComponent {
   loginDto = new Login();
   registerDto = new Register();
   jwtDto = new jwtAuth;
+
 
   public _RegistrationComplete = false;
 
