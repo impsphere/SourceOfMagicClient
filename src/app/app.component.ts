@@ -4,6 +4,7 @@ import { Register } from './Models/register';
 import { jwtAuth } from './Models/jwtAuth';
 import { AuthenticationService } from './services/authentication.service';
 import { MatLabel } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @Component({

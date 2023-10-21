@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LoginRegComponent } from './User/login-reg/login-reg.component';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

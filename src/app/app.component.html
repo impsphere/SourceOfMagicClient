@@ -87,11 +87,17 @@
   <mat-card-title>Source Of Mecha</mat-card-title>
 </mat-card>
 
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link routerLink="/home">Home</a>
+  <a mat-tab-link routerLink="/loginreg">Login</a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
 <div class="content" role="main">
   <img src="assets/LogoBannerSm.png" align="center">
   <br/><br/><br/><br/>
 
-  <app-login-reg></app-login-reg>
+  <router-outlet></router-outlet>
 
   <hr>
   <br/><br/><br/><br/>
