@@ -5,6 +5,7 @@ import { jwtAuth } from '../../Models/jwtAuth';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Validators, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginRegComponent {
     return this._RegistrationComplete;
   }
 
-  constructor(private authService: AuthenticationService){}
+  constructor(private authService: AuthenticationService,
+    private _router: Router){}
 
   Register(registerDto: Register) {
     this.authService.register(registerDto).subscribe();
@@ -38,6 +40,7 @@ export class LoginRegComponent {
     this.authService.login(loginDto).subscribe((jwtDto) => {
       localStorage.setItem('jwtToken', jwtDto.token);
     });
+    this._router.navigate(['home'])
   }
 
   onSubmit() {

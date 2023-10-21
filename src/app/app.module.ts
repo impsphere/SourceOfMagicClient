@@ -19,11 +19,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRegComponent
+    LoginRegComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
