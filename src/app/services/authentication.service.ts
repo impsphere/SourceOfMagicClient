@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '../Models/login';
 import { Register } from '../Models/register';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.development';
 import { jwtAuth } from '../Models/jwtAuth';
 
@@ -16,7 +17,10 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   public register(user: Register): Observable<jwtAuth> {
-    return this.http.post<jwtAuth>(`${environment.apiUrl}${this.registerUrl}`, user);
+    return this.http.post<jwtAuth>(`${environment.apiUrl}${this.registerUrl}`, user).pipe(catchError(this.errorHandler))
+  }
+  errorHandler(error: HttpErrorResponse) {
+    return throwError(() => new Error(error.error));
   }
 
   public login(user: Login): Observable<jwtAuth> {

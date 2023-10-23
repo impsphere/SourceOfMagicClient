@@ -50,8 +50,7 @@ import { HomeComponent } from './home/home.component';
     multi: true
   }],
   bootstrap: [
-    AppComponent,
-    LoginRegComponent
+    AppComponent
   ]
 })
 export class AppModule { }

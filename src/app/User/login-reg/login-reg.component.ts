@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-login-reg',
+  selector: 'login-reg',
   templateUrl: './login-reg.component.html',
   styleUrls: ['./login-reg.component.css']
 })
@@ -20,20 +20,54 @@ export class LoginRegComponent {
   jwtDto = new jwtAuth;
 
 
-  public _RegistrationComplete = false;
+  public _RegistrationComplete : boolean = false;
+  public _RegistrationFailedEmail : boolean = false;
+  public _RegistrationFailedUser : boolean = false;
 
   get RegistrationComplete(): boolean {
     return this._RegistrationComplete;
+  }
+
+  get RegistrationFailedEmail(): boolean {
+    return this._RegistrationFailedEmail;
+  }
+
+  get RegistrationFailedUser(): boolean {
+    return this._RegistrationFailedUser;
   }
 
   constructor(private authService: AuthenticationService,
     private _router: Router){}
 
   Register(registerDto: Register) {
-    this.authService.register(registerDto).subscribe();
+    this._RegistrationFailedEmail = false;
+    this._RegistrationFailedUser = false;
+    this._RegistrationComplete = false;
+    this.authService.register(registerDto).subscribe( {
+      next: value => 
+      {
+        this._RegistrationComplete = true;
+        this.signUpForm.reset();
+        this.signUpForm.markAsPristine();
+        this.signUpForm.markAsUntouched();
+        this.signUpForm.setErrors(null);
+      },
+      error: err => 
+      {
+        if (new String(err).indexOf("Email already exists") >= 0)
+        {this._RegistrationFailedEmail = true;}
+        else
+        {this._RegistrationFailedUser = true;}
+        console.log("This is an error:", err)
+      }
+    });
     // Give the user a success message and clear out the DTO objeect so the screen clears
-    this._RegistrationComplete = true;
-    this.signUpForm.reset();
+    
+    //if ((this._RegistrationFailedEmail === false) && (this._RegistrationFailedUser === false))
+    //{
+    //  this._RegistrationComplete = true;
+    //  this.signUpForm.reset();
+    //}
   }
 
   Login(loginDto: Login) {
