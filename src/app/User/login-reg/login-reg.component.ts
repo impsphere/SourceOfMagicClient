@@ -46,11 +46,13 @@ export class LoginRegComponent {
     this.authService.register(registerDto).subscribe( {
       next: value => 
       {
+        // Give the user a success message and clear out the DTO objeect so the screen clears
         this._RegistrationComplete = true;
-        this.signUpForm.reset();
         this.signUpForm.markAsPristine();
         this.signUpForm.markAsUntouched();
         this.signUpForm.setErrors(null);
+        //this.signUpForm.reset({ Name: null, Email: null, Password: null, PasswordRepeated: null});
+        this.signUpForm.disable();
       },
       error: err => 
       {
@@ -61,13 +63,7 @@ export class LoginRegComponent {
         console.log("This is an error:", err)
       }
     });
-    // Give the user a success message and clear out the DTO objeect so the screen clears
     
-    //if ((this._RegistrationFailedEmail === false) && (this._RegistrationFailedUser === false))
-    //{
-    //  this._RegistrationComplete = true;
-    //  this.signUpForm.reset();
-    //}
   }
 
   Login(loginDto: Login) {

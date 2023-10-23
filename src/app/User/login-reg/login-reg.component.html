@@ -102,6 +102,7 @@
 
     <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid" (click)="Register(registerDto)">Submit Profile</button>
 
+
     <div *ngIf="RegistrationComplete===true" class="cross-validation-error-message alert alert-success">
         <mat-card class="mat-card-content">
             <mat-card-title>Success.  Please check your email for a verification email.</mat-card-title>
