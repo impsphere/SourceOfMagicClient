@@ -13,10 +13,22 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Source of Mecha';
+  title = 'Huddle of Heroes';
+  userName: string;
 
-  constructor(private authService: AuthenticationService){}
+  constructor(private authService: AuthenticationService){
+
+    this.userName = "";  
+
+    this.authService.getUserName().subscribe((data) => {  
+ 
+      this.userName = data;
+      console.log("App component username:" + this.userName);
+    }); 
+  }
   
+  //userName: string = this.authService.getUserName();
+
   GetWeather() {
     this.authService.getWeather().subscribe((weatherdata:any) => {
       console.log(weatherdata);

@@ -69,8 +69,10 @@ export class LoginRegComponent {
   Login(loginDto: Login) {
     this.authService.login(loginDto).subscribe((jwtDto) => {
       localStorage.setItem('jwtToken', jwtDto.token);
+      this.authService.getUserName();
+      this._router.navigate(['home'])
     });
-    this._router.navigate(['home'])
+
   }
 
   onSubmit() {
