@@ -20,11 +20,19 @@ export class AppComponent {
 
     this.userName = "";  
 
-    this.authService.getUserName().subscribe((data) => {  
+    this.authService.getUserName().subscribe(data => {  
  
       this.userName = data;
-      console.log("App component username:" + this.userName);
+      //console.log("App component username:" + this.userName);
     }); 
+
+    this.authService.eventStream.subscribe(message =>
+      {
+        this.userName = message.toString();
+        //console.log(message);
+      }); 
+    
+
   }
   
   //userName: string = this.authService.getUserName();

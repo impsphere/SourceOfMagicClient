@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '../Models/login';
 import { Register } from '../Models/register';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.development';
 import { jwtAuth } from '../Models/jwtAuth';
@@ -52,11 +52,15 @@ export class AuthenticationService {
       const payload = atob(token.split('.')[1]); // decode payload of token
 
       const parsedPayload = JSON.parse(payload); // convert payload into an Object
-
-      return of("Welcome, " + parsedPayload.name + "!");
+      const message = "Welcome, " + parsedPayload.name + "!";
+      this.eventStream.next(message);
+      return of(message);
+      //return message.asObservable();
     } else {
       return of("");
     }
   }
+
+  eventStream = new Subject<string>();
 
 }

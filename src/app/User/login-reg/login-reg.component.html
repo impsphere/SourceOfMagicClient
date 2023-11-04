@@ -29,8 +29,8 @@
     <mat-card-title>New User Registration</mat-card-title>
   
     <mat-form-field class="example-full-width">
-      <mat-label>Name</mat-label>
-      <input matInput placeholder="Your name" [(ngModel)]="registerDto.name" formControlName="Name">
+      <mat-label>User Name</mat-label>
+      <input matInput placeholder="User Name (no spaces)" [(ngModel)]="registerDto.name" formControlName="Name">
     </mat-form-field>
     <div
         *ngIf="signUpForm.controls.Name.invalid && (signUpForm.controls.Name.dirty || signUpForm.controls.Name.touched)"
