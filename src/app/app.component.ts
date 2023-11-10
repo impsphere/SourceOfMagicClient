@@ -6,9 +6,9 @@ import { AuthenticationService } from './services/authentication.service';
 import { NflplayersService } from './services/nflplayers.service';
 import { MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTableModule } from  '@angular/material/table';
 import { ViewChild } from '@angular/core';
-
+import { MatTable, MatTableModule } from '@angular/material/table';
+ 
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,11 @@ export class AppComponent {
   title = 'Huddle of Heroes';
   userName: string;
 
+  dataSource : any;
+  columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD'
+  , 'rushYards', 'rushTD'];
+
+  @ViewChild(MatTable) mytable!: MatTable<any>;
 
   constructor(private authService: AuthenticationService,
     private nflPlayersService: NflplayersService){
@@ -45,6 +50,7 @@ export class AppComponent {
   GetNFLPlayers(pos: string) {
     this.nflPlayersService.getNFLPlayers(pos).subscribe((playersdata:any) => {
       console.log(playersdata);
+      this.dataSource = playersdata;
     });
   }
 }
