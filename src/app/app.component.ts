@@ -53,4 +53,9 @@ export class AppComponent {
       this.dataSource = playersdata;
     });
   }
+
+  editContact(player: any) {
+    console.log(player);
+  }
+
 }

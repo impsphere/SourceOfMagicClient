@@ -17,3 +17,8 @@ mat-card-title{
   .mat-card-content{
     padding:5px !important;
   }
+
+  tr.NFLPlayerRow:hover {
+    background-color: #dca9fa;
+    cursor: pointer;
+  }
