@@ -1,0 +1,54 @@
+<button mat-raised-button color="primary" (click)="GetNFLPlayers('QB')">Browse Quarterbacks</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #mytable>
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr class="NFLPlayerRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editContact(row)"></tr> 
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef >Name</th>
+      <td mat-cell *matCellDef="let t">{{ t.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="headShotURL">
+      <th mat-header-cell *matHeaderCellDef>Picture</th>
+      <td mat-cell *matCellDef="let element"> <img [src]="element.headShotURL" height="80px"/> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Position</th>
+      <td mat-cell *matCellDef="let t">{{ t.position }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="passYards">
+      <th mat-header-cell *matHeaderCellDef>Pass Yds</th>
+      <td mat-cell *matCellDef="let t">{{ t.passYards }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="passTD">
+      <th mat-header-cell *matHeaderCellDef>Pass TD</th>
+      <td mat-cell *matCellDef="let t">{{ t.passTD }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rushYards">
+      <th mat-header-cell *matHeaderCellDef>Rush Yds</th>
+      <td mat-cell *matCellDef="let t">{{ t.rushYards }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rushTD">
+      <th mat-header-cell *matHeaderCellDef>Rush TD</th>
+      <td mat-cell *matCellDef="let t">{{ t.rushTD }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef>timestamp</th>
+      <td mat-cell *matCellDef="let t">{{ dtPipe.transform(t.timestamp,'short') }}</td>
+    </ng-container>
+
+</table>
+
+<div *ngIf="isLoading" 
+   style="display: flex; justify-content: center; align-items: center; background: white;">
+  <mat-progress-spinner 
+    color="primary" 
+    mode="indeterminate">
+  </mat-progress-spinner>
+</div>

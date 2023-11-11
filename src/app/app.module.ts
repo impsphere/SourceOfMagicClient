@@ -19,16 +19,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 
 import { DatePipe } from '@angular/common';
+import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginRegComponent,
-    HomeComponent
+    HomeComponent,
+    NFLPlayersComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { DatePipe } from '@angular/common';
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

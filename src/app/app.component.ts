@@ -19,13 +19,7 @@ import { DatePipe } from '@angular/common';
 export class AppComponent {
   title = 'Huddle of Heroes';
   userName: string;
-  dtPipe : DatePipe;
 
-  dataSource : any;
-  columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD'
-  , 'rushYards', 'rushTD', 'timestamp'];
-
-  @ViewChild(MatTable) mytable!: MatTable<any>;
 
   constructor(private authService: AuthenticationService,
     private nflPlayersService: NflplayersService,
@@ -44,22 +38,11 @@ export class AppComponent {
         this.userName = message.toString();
         //console.log(message);
       }); 
-    
-      this.dtPipe = datePipe;
+  
   }
   
 
   //userName: string = this.authService.getUserName();
 
-  GetNFLPlayers(pos: string) {
-    this.nflPlayersService.getNFLPlayers(pos).subscribe((playersdata:any) => {
-      console.log(playersdata);
-      this.dataSource = playersdata;
-    });
-  }
-
-  editContact(player: any) {
-    console.log(player);
-  }
 
 }
