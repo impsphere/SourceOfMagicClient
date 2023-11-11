@@ -8,6 +8,7 @@ import { MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { DatePipe } from '@angular/common';
  
 
 @Component({
@@ -18,15 +19,17 @@ import { MatTable, MatTableModule } from '@angular/material/table';
 export class AppComponent {
   title = 'Huddle of Heroes';
   userName: string;
+  dtPipe : DatePipe;
 
   dataSource : any;
   columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD'
-  , 'rushYards', 'rushTD'];
+  , 'rushYards', 'rushTD', 'timestamp'];
 
   @ViewChild(MatTable) mytable!: MatTable<any>;
 
   constructor(private authService: AuthenticationService,
-    private nflPlayersService: NflplayersService){
+    private nflPlayersService: NflplayersService,
+    private datePipe: DatePipe){
 
     this.userName = "";  
 
@@ -42,6 +45,7 @@ export class AppComponent {
         //console.log(message);
       }); 
     
+      this.dtPipe = datePipe;
   }
   
 

@@ -94,7 +94,7 @@
 <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 
 <div class="content" role="main">
-  <img src="assets/HuddleHeroesLogoSm.png" align="center">
+  <img src="assets/WizardLogo3.png" align="center">
   <br/><br/>
 
   <router-outlet></router-outlet>
@@ -141,6 +141,10 @@
         <td mat-cell *matCellDef="let t">{{ t.rushTD }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef>timestamp</th>
+        <td mat-cell *matCellDef="let t">{{ dtPipe.transform(t.timestamp,'short') }}</td>
+      </ng-container>
 
   </table>
 

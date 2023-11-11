@@ -22,6 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 
+import { DatePipe } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import { HomeComponent } from './home/home.component';
     useClass: AuthenticationInterceptor,
     multi: true
   },
-  AuthGuard],
+  AuthGuard, 
+  DatePipe],
   bootstrap: [
     AppComponent
   ]
