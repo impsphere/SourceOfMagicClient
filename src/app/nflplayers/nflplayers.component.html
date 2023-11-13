@@ -28,6 +28,11 @@
       <td mat-cell *matCellDef="let t">{{ t.passTD }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="interceptions">
+        <th mat-header-cell *matHeaderCellDef>Ints</th>
+        <td mat-cell *matCellDef="let t">{{ t.interceptions }}</td>
+      </ng-container>
+
     <ng-container matColumnDef="rushYards">
       <th mat-header-cell *matHeaderCellDef>Rush Yds</th>
       <td mat-cell *matCellDef="let t">{{ t.rushYards }}</td>
@@ -37,6 +42,12 @@
       <th mat-header-cell *matHeaderCellDef>Rush TD</th>
       <td mat-cell *matCellDef="let t">{{ t.rushTD }}</td>
     </ng-container>
+
+    
+    <ng-container matColumnDef="nextGameTeam">
+        <th mat-header-cell *matHeaderCellDef>Opponent</th>
+        <td mat-cell *matCellDef="let t">{{ t.nextGameTeam }}</td>
+      </ng-container>
 
     <ng-container matColumnDef="timestamp">
       <th mat-header-cell *matHeaderCellDef>timestamp</th>

@@ -21,8 +21,8 @@ export class NFLPlayersComponent {
   dtPipe : DatePipe;
   isLoading = false;
   dataSource : any;
-  columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD'
-  , 'rushYards', 'rushTD', 'timestamp'];
+  columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD', 'interceptions'
+  , 'rushYards', 'rushTD', 'nextGameTeam','timestamp'];
 
   @ViewChild(MatTable) mytable!: MatTable<any>;
 
