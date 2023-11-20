@@ -11,7 +11,7 @@ mat-card-title{
 
   .mat-card-page{
     padding:0 !important;
-    width: 640px;
+    width: 100%;
   }
   
   .mat-card-content{
