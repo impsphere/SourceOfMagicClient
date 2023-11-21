@@ -19,6 +19,12 @@
 
   <button mat-raised-button color="primary" (click)="Login(loginDto)">Login</button>
 
+  <div *ngIf="LoginFailedUser===true" class="cross-validation-error-message alert alert-danger">
+    <mat-card class="mat-card-error">
+        <mat-card-title>Login failed.</mat-card-title>
+    </mat-card>
+ </div>
+
 </mat-card>
 
 

@@ -26,7 +26,7 @@ export class AuthenticationService {
   }
 
   public login(user: Login): Observable<jwtAuth> {
-    return this.http.post<jwtAuth>(`${environment.apiUrl}${this.loginUrl}`, user);
+    return this.http.post<jwtAuth>(`${environment.apiUrl}${this.loginUrl}`, user).pipe(catchError(this.errorHandler))
   }
 
   public getWeather(): Observable<any> {

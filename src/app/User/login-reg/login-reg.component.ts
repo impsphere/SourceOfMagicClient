@@ -23,6 +23,7 @@ export class LoginRegComponent {
   public _RegistrationComplete : boolean = false;
   public _RegistrationFailedEmail : boolean = false;
   public _RegistrationFailedUser : boolean = false;
+  public _LoginFailedUser : boolean = false;
 
   get RegistrationComplete(): boolean {
     return this._RegistrationComplete;
@@ -34,6 +35,10 @@ export class LoginRegComponent {
 
   get RegistrationFailedUser(): boolean {
     return this._RegistrationFailedUser;
+  }
+
+  get LoginFailedUser(): boolean {
+    return this._LoginFailedUser;
   }
 
   constructor(private authService: AuthenticationService,
@@ -67,10 +72,19 @@ export class LoginRegComponent {
   }
 
   Login(loginDto: Login) {
-    this.authService.login(loginDto).subscribe((jwtDto) => {
-      localStorage.setItem('jwtToken', jwtDto.token);
-      this.authService.getUserName();
-      this._router.navigate(['home'])
+    this.authService.login(loginDto).subscribe({
+      next: (jwtDto) => 
+      {
+        this._LoginFailedUser = false;
+        localStorage.setItem('jwtToken', jwtDto.token);
+        this.authService.getUserName();
+        this._router.navigate(['home'])
+      },
+      error: err => 
+      {
+        this._LoginFailedUser = true;
+        console.log("This is an error:", err)
+      }
     });
 
   }
