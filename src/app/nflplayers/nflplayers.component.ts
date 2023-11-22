@@ -21,7 +21,7 @@ export class NFLPlayersComponent {
   dtPipe : DatePipe;
   isLoading = false;
   dataSource : any;
-  columns: string[] = ['name', 'headShotURL', 'position', 'passYards', 'passTD', 'interceptions'
+  columns: string[] = ['name', 'headShotURL', 'position', 'playerProjection.fantasyPoints','passYards', 'passTD', 'interceptions'
   , 'rushYards', 'rushTD', 'nextGameTeam','timestamp'];
 
   @ViewChild(MatTable) mytable!: MatTable<any>;
@@ -38,12 +38,15 @@ export class NFLPlayersComponent {
 
   GetNFLPlayers(pos: string) {
     this.isLoading = true;
-    this.nflPlayersService.getNFLPlayers(pos).subscribe((playersdata:any) => {
-      console.log(playersdata);
+    this.nflPlayersService.getNFLPlayers(pos).subscribe({
+      next: (playersdata:any) => 
+      {
+       console.log(playersdata);
       this.isLoading = false;
       this.dataSource = playersdata;
-    }, 
-    error => this.isLoading = false);
+      }, 
+      error: err => {this.isLoading = false}
+    });
   }
 
   editContact(player: any) {

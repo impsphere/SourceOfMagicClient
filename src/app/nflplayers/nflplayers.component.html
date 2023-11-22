@@ -24,6 +24,11 @@
       <td mat-cell *matCellDef="let t">{{ t.position }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="playerProjection.fantasyPoints">
+      <th mat-header-cell *matHeaderCellDef>Proj. Fantasy Pts.</th>
+      <td mat-cell *matCellDef="let t">{{ t.playerProjection.fantasyPoints }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="passYards">
       <th mat-header-cell *matHeaderCellDef>Pass Yds</th>
       <td mat-cell *matCellDef="let t">{{ t.passYards }}</td>
