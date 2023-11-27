@@ -22,7 +22,7 @@ export class NFLPlayersComponent {
   isLoading = false;
   dataSource : any;
   columns: string[] = ['name', 'headShotURL', 'position', 'playerProjection.fantasyPoints','passYards', 'passTD', 'interceptions'
-  , 'rushYards', 'rushTD', 'nextGameTeam','timestamp'];
+  , 'rushYards', 'rushTD', 'recYards', 'recTD', 'nextGameTeam','timestamp'];
 
   @ViewChild(MatTable) mytable!: MatTable<any>;
 

@@ -4,8 +4,10 @@
 
 <br/><br/>
 
-<button mat-raised-button color="primary" (click)="GetNFLPlayers('QB')">Browse Quarterbacks</button>
-
+<button mat-raised-button color="primary" (click)="GetNFLPlayers('QB')">Browse Quarterbacks</button>&nbsp;&nbsp;
+<button mat-raised-button color="primary" (click)="GetNFLPlayers('RB')">Browse Running Backs</button>&nbsp;&nbsp;
+<button mat-raised-button color="primary" (click)="GetNFLPlayers('WR')">Browse Wide Receivers</button>
+<br/><br/>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #mytable>
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
   <tr class="NFLPlayerRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editContact(row)"></tr> 
@@ -54,6 +56,15 @@
       <td mat-cell *matCellDef="let t">{{ t.rushTD }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="recYards">
+      <th mat-header-cell *matHeaderCellDef>Rec Yds</th>
+      <td mat-cell *matCellDef="let t">{{ t.recYards }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="recTD">
+      <th mat-header-cell *matHeaderCellDef>Rec TD</th>
+      <td mat-cell *matCellDef="let t">{{ t.recTD }}</td>
+    </ng-container>
     
     <ng-container matColumnDef="nextGameTeam">
         <th mat-header-cell *matHeaderCellDef>Opponent</th>

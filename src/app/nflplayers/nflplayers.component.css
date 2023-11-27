@@ -21,3 +21,7 @@ mat-card-title{
     background-color: #dca9fa;
     cursor: pointer;
   }
+
+  mat-raised-button  {
+    margin-left: 10px;
+  }
