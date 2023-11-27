@@ -4,12 +4,14 @@ import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
+import { GameMockupComponent } from './game-mockup/game-mockup.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'nflplayers', component: NFLPlayersComponent, canActivate: [AuthGuard] },
+  {path: 'gamemockup', component: GameMockupComponent, canActivate: [AuthGuard] },
   {path: 'loginreg', component: LoginRegComponent }
 ];
 

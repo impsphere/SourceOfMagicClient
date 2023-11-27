@@ -1,0 +1,38 @@
+<p>
+    <mat-accordion>
+        <mat-expansion-panel align="left">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Fool of a Halfling!
+            </mat-panel-title>
+            <mat-panel-description>
+              Piper (LeSean McCoy-RB) &lt; 14 carries (12): <b>Villains gain 4 point bonus!</b>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+<img src="../..\assets\PiperWell6.webp" alt="PiperWell" width="256px"/>
+
+                <ul>
+                <li>Piper accidentally dislodges a stone at the edge of a deep well, risking alerting the Orcs of the mines.</li>
+                <li>If Piper (LeSean McCoy-RB) has less than 14 carries then Piper fails to grab the falling stone which alerts the Orcs and gives the Villains a 1 TD (4 point) bonus in all future stages.</li>
+                <li>If Piper (LeSean McCoy-RB) has more than 17 carries then Piper catches the stone before it drops and the heroes maintain secrecy, giving them a 1 TD (4 point) bonus.</li>
+                <li><b>Result:</b>  LeSean McCoy-RB has 12 carries against LV, so Piper dislodges a large stone which <b>gives the Villains a 1 TD (4 point) bonus in all future stages.</b></li>
+                </ul>
+
+            
+          
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+</p>

@@ -20,18 +20,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 
 import { DatePipe } from '@angular/common';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
+import { GameMockupComponent } from './game-mockup/game-mockup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginRegComponent,
     HomeComponent,
-    NFLPlayersComponent
+    NFLPlayersComponent,
+    GameMockupComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
     MatFormFieldModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatGridListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
