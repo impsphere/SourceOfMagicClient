@@ -4,6 +4,7 @@ import { Register } from './Models/register';
 import { jwtAuth } from './Models/jwtAuth';
 import { AuthenticationService } from './services/authentication.service';
 import { NflplayersService } from './services/nflplayers.service';
+import { GamesService } from './services/games.service';
 import { MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ViewChild } from '@angular/core';
@@ -23,6 +24,7 @@ export class AppComponent {
 
   constructor(private authService: AuthenticationService,
     private nflPlayersService: NflplayersService,
+    private gamesService: GamesService,
     private datePipe: DatePipe){
 
     this.userName = "";  

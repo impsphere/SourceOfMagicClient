@@ -1,0 +1,68 @@
+<mat-card>
+    <mat-card-title>Browse Huddle of Heroes Games</mat-card-title>            
+  </mat-card>
+  
+  <br/><br/>
+  
+  <br/><br/>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #mytable>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr class="NFLPlayerRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editContact(row)"></tr> 
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef >Description</th>
+        <td mat-cell *matCellDef="let t">{{ t.description }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="scenario">
+        <th mat-header-cell *matHeaderCellDef>Scenario</th>
+        <td mat-cell *matCellDef="let t"> {{ t.scenario }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="heroName">
+        <th mat-header-cell *matHeaderCellDef>Hero Player</th>
+        <td mat-cell *matCellDef="let t">{{ t.heroName }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="villainName">
+        <th mat-header-cell *matHeaderCellDef>Villain Player</th>
+        <td mat-cell *matCellDef="let t">{{ t.villainName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="heroScore">
+        <th mat-header-cell *matHeaderCellDef >Hero Score</th>
+        <td mat-cell *matCellDef="let t">{{ t.heroScore }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="villainScore">
+        <th mat-header-cell *matHeaderCellDef>Villain Score</th>
+        <td mat-cell *matCellDef="let t"> {{ t.villainScore }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="rosterLockInd">
+        <th mat-header-cell *matHeaderCellDef>Rosters Locked</th>
+        <td mat-cell *matCellDef="let t">{{ t.rosterLockInd }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="finalInd">
+        <th mat-header-cell *matHeaderCellDef>Completed</th>
+        <td mat-cell *matCellDef="let t">{{ t.finalInd }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="season">
+        <th mat-header-cell *matHeaderCellDef>Season</th>
+        <td mat-cell *matCellDef="let t">{{ t.week.season }}</td>
+      </ng-container>
+    
+      <ng-container matColumnDef="week">
+        <th mat-header-cell *matHeaderCellDef>Week</th>
+        <td mat-cell *matCellDef="let t">{{ t.week.week }}</td>
+      </ng-container>
+  </table>
+  
+  <div *ngIf="isLoading" 
+     style="display: flex; justify-content: center; align-items: center; background: white;">
+    <mat-progress-spinner 
+      color="primary" 
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </div>

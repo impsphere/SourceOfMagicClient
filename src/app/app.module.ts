@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { DatePipe } from '@angular/common';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
 import { GameMockupComponent } from './game-mockup/game-mockup.component';
+import { GameListComponent } from './game-list/game-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { GameMockupComponent } from './game-mockup/game-mockup.component';
     LoginRegComponent,
     HomeComponent,
     NFLPlayersComponent,
-    GameMockupComponent
+    GameMockupComponent,
+    GameListComponent
   ],
   imports: [
     BrowserModule,
