@@ -37,6 +37,7 @@ export class NFLPlayersComponent {
   //userName: string = this.authService.getUserName();
 
   GetNFLPlayers(pos: string) {
+    this.dataSource = null;
     this.isLoading = true;
     this.nflPlayersService.getNFLPlayers(pos).subscribe({
       next: (playersdata:any) => 

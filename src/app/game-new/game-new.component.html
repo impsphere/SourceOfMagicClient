@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-title>Create a New Game</mat-card-title>            
+  </mat-card>
+
+  <br/><br/>
+
+<mat-card class="mat-card-page">
+
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Label Your Game" [(ngModel)]="gameDto.Description">
+    </mat-form-field>
+
+
+    <mat-form-field>
+        <mat-label>Hero Player</mat-label>
+        <mat-select placeholder="Select Hero Player" [(ngModel)]="selectedHeroPlayerId" (selectionChange)="SetHeroPlayer($event)">
+            <mat-option *ngFor="let player of playerSource" [value]="player.playerId" >{{ player.name + ", Wins:" + player.wins + ", Losses: " + player.losses }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Villain Player</mat-label>
+        <mat-select placeholder="Select Villain Player" [(ngModel)]="selectedVillainPlayerId" (selectionChange)="SetVillainPlayer($event)">
+            <mat-option *ngFor="let player of playerSource" [value]="player.playerId" >{{ player.name + ", Wins:" + player.wins + ", Losses: " + player.losses }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="AddGame(gameDto)">Add Game</button>
+
+
+
+</mat-card>

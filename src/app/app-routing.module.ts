@@ -6,6 +6,7 @@ import { AuthGuard } from './auth.guard';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
 import { GameMockupComponent } from './game-mockup/game-mockup.component';
 import { GameListComponent } from './game-list/game-list.component';
+import { GameNewComponent } from './game-new/game-new.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'nflplayers', component: NFLPlayersComponent, canActivate: [AuthGuard] },
   {path: 'gamemockup', component: GameMockupComponent, canActivate: [AuthGuard] },
   {path: 'gamelist', component: GameListComponent, canActivate: [AuthGuard] },
+  {path: 'gamenew', component: GameNewComponent, canActivate: [AuthGuard] },
   {path: 'loginreg', component: LoginRegComponent }
 ];
 

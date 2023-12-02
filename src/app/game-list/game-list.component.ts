@@ -10,6 +10,7 @@ import { ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DatePipe } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-list',
@@ -21,12 +22,13 @@ export class GameListComponent {
   isLoading = false;
   dataSource : any;
   columns: string[] = ['description', 'scenario', 'heroName', 'villainName', 'heroScore', 'villainScore',
-        'finalInd', 'rosterLockInd', 'season', 'week'];
+        'finalInd', 'rosterLockInd', 'season', 'week', 'timestamp'];
 
   @ViewChild(MatTable) mytable!: MatTable<any>;
 
   constructor(private authService: AuthenticationService,
     private gamesService: GamesService,
+    private router: Router,
     private datePipe: DatePipe){
 
       this.dtPipe = datePipe;
@@ -46,5 +48,10 @@ export class GameListComponent {
   editContact(player: any) {
     console.log(player);
   }
+
+  addNewGame() {
+    this.router.navigateByUrl('/gamenew');
+  }
+
 
 }

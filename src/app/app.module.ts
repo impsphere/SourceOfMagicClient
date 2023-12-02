@@ -22,6 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 
@@ -29,6 +30,7 @@ import { DatePipe } from '@angular/common';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
 import { GameMockupComponent } from './game-mockup/game-mockup.component';
 import { GameListComponent } from './game-list/game-list.component';
+import { GameNewComponent } from './game-new/game-new.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { GameListComponent } from './game-list/game-list.component';
     HomeComponent,
     NFLPlayersComponent,
     GameMockupComponent,
-    GameListComponent
+    GameListComponent,
+    GameNewComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { GameListComponent } from './game-list/game-list.component';
     MatTabsModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
