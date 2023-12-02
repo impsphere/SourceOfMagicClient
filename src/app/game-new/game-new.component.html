@@ -27,6 +27,13 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-form-field>
+        <mat-label>Scenario</mat-label>
+        <mat-select placeholder="Select Scenario" [(ngModel)]="selectedScenarioId" (selectionChange)="SetScenario($event)">
+            <mat-option *ngFor="let scenario of scenarioSource" [value]="scenario.scenarioId" >{{ scenario.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
   <button mat-raised-button color="primary" (click)="AddGame(gameDto)">Add Game</button>
 
 

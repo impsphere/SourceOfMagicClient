@@ -24,7 +24,8 @@ export class GameNewComponent {
   playerSource: any;
   selectedHeroPlayerId: any;
   selectedVillainPlayerId: any;
-  sccenarioSource: any;
+  scenarioSource: any;
+  selectedScenarioId: any;
 
   constructor(private authService: AuthenticationService,
     private gamesService: GamesService,
@@ -35,6 +36,15 @@ export class GameNewComponent {
         {
           console.log(playerdata);
           this.playerSource = playerdata;
+        }, 
+        error: err => {}
+      });
+
+      this.gamesService.getScenarios().subscribe({
+        next: (scenariodata:any) => 
+        {
+          console.log(scenariodata);
+          this.scenarioSource = scenariodata;
         }, 
         error: err => {}
       });
@@ -53,7 +63,19 @@ export class GameNewComponent {
     this.selectedVillainPlayerId = event.source.value;
   }
 
+  SetScenario(event: any)
+  {
+    console.log(event);
+    this.selectedScenarioId = event.source.value;
+  }
+
   AddGame(gameDto: gameAdd) {
+
+    gameDto.HeroPlayerId = this.selectedHeroPlayerId;
+    gameDto.VillainPlayerId = this.selectedVillainPlayerId;
+    gameDto.ScenarioId = this.selectedScenarioId;
+    console.log(gameDto);
+
     this.gamesService.addGame(gameDto).subscribe({
       next: (gameDto) => 
       {
