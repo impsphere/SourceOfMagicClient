@@ -1,0 +1,22 @@
+
+mat-card-title{
+    background-color:rgb(163, 159, 160) !important;
+    padding:5px !important;
+  }
+  
+  mat-card-subtitle{
+    background-color:rgb(133, 118, 150) !important;
+    padding:5px !important;
+  }
+.mat-card-page{
+    padding:0 !important;
+    width: 640px;
+  }
+  
+  .mat-card-content{
+    padding:5px !important;
+  }
+
+mat-raised-button  {
+    margin-left: 10px;
+  }

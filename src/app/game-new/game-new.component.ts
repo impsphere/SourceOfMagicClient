@@ -89,4 +89,8 @@ export class GameNewComponent {
 
   }
 
+  Cancel() {
+    this.router.navigate(['gamelist']);
+  }
+
 }

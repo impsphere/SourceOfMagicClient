@@ -7,7 +7,7 @@
   <br/><br/>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" #mytable>
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr class="NFLPlayerRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editContact(row)"></tr> 
+    <tr class="NFLPlayerRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editGame(row)"></tr> 
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef >Description</th>
         <td mat-cell *matCellDef="let t">{{ t.description }}</td>

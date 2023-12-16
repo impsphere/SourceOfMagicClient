@@ -45,8 +45,8 @@ export class GameListComponent {
       });
   }
 
-  editContact(player: any) {
-    console.log(player);
+  editGame(gameid: any) {
+    this.router.navigateByUrl('/gamedetail?id=' + gameid);
   }
 
   addNewGame() {

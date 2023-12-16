@@ -28,7 +28,7 @@ import { HomeComponent } from './home/home.component';
 
 import { DatePipe } from '@angular/common';
 import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
-import { GameMockupComponent } from './game-mockup/game-mockup.component';
+import { GameDetailComponent } from './game-detail/game-detail.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameNewComponent } from './game-new/game-new.component';
 
@@ -38,7 +38,7 @@ import { GameNewComponent } from './game-new/game-new.component';
     LoginRegComponent,
     HomeComponent,
     NFLPlayersComponent,
-    GameMockupComponent,
+    GameDetailComponent,
     GameListComponent,
     GameNewComponent
   ],
