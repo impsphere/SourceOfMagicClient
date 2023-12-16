@@ -1,3 +1,37 @@
+<mat-card>
+  <mat-card-title>Game Detail</mat-card-title>            
+</mat-card>
+<br/>
+
+<img src="\assets\MinesofD.webp" width="256px" >
+
+<div *ngIf="!isLoading">
+<mat-card class="mat-card-page">
+
+
+  <mat-form-field class="example-full-width">
+      <mat-label>Game Name</mat-label>
+      <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.description">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Scenario</mat-label>
+    <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.scenario">
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Hero Player</mat-label>
+  <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.heroName">
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+<mat-label>Villain Player</mat-label>
+<input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.villainName">
+</mat-form-field>
+
+</mat-card>
+</div>
+
 <p>
     <mat-accordion>
         <mat-expansion-panel align="left">
@@ -36,3 +70,10 @@
         </mat-expansion-panel>
       </mat-accordion>
 </p>
+<div *ngIf="isLoading" 
+style="display: flex; justify-content: center; align-items: center; background: white;">
+<mat-progress-spinner 
+ color="primary" 
+ mode="indeterminate">
+</mat-progress-spinner>
+</div>

@@ -21,6 +21,10 @@ export class GamesService {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"Get"}`);
   }
 
+  public getGame(GameId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetGame?GameId="+GameId}`);
+  }
+
   public getPlayers(): Observable<jwtAuth> {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllPlyrs"}`);
   }
