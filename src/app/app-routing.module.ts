@@ -13,14 +13,14 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'nflplayers', component: NFLPlayersComponent, canActivate: [AuthGuard] },
-  {path: 'gamedetail', component: GameDetailComponent, canActivate: [AuthGuard] },
+  {path: 'gamedetail/:id', component: GameDetailComponent, canActivate: [AuthGuard] },
   {path: 'gamelist', component: GameListComponent, canActivate: [AuthGuard] },
   {path: 'gamenew', component: GameNewComponent, canActivate: [AuthGuard] },
   {path: 'loginreg', component: LoginRegComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: true, bindToComponentInputs: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

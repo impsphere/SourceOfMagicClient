@@ -45,8 +45,13 @@ export class GameListComponent {
       });
   }
 
-  editGame(gameid: any) {
-    this.router.navigateByUrl('/gamedetail?id=' + gameid);
+  editGame(gameid: string) {
+    this.router.navigateByUrl('/gamedetail/?id=' + gameid);
+    //this.router.navigate(['gamedetail'], {
+    //  queryParams: {
+    //id: gameid 
+    //  }
+    //});
   }
 
   addNewGame() {

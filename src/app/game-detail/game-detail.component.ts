@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Input } from '@angular/core';
 
 
 @Component({
@@ -11,15 +12,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class GameDetailComponent  {
   panelOpenState: boolean;
-  //id: string;
+
+  @Input() id? = '';
+  gameId : string = '';
+  
   constructor(private router: Router,
     public route: ActivatedRoute){
-      //let idFromStorage = this.route.snapshot.paramMap.get('id');
-      //if (!idFromStorage ) { 
-      //  throw new Error("No game id supplied!"); 
-      //}
-      //this.id = idFromStorage;
-      //console.log("Game detail: " + this.id);
+
       this.panelOpenState = false;
   }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      
+      this.gameId = params.get('id') ?? '';
+      console.log("Game detail: " + this.gameId)
+
+
+
+    })
+  }
+
 }
