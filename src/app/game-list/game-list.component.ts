@@ -45,13 +45,11 @@ export class GameListComponent {
       });
   }
 
-  editGame(gameid: string) {
-    this.router.navigateByUrl('/gamedetail/?id=' + gameid);
-    //this.router.navigate(['gamedetail'], {
-    //  queryParams: {
-    //id: gameid 
-    //  }
-    //});
+  editGame(row: any) {
+    //this.router.navigate(['/gamedetail'], {queryParams: {id: gameid}} );
+    //this.router.navigate(['/gamedetail'], {queryParams: {id: row.gameId}} );
+    console.log("List"+row.gameId)
+    this.router.navigateByUrl('/gamedetail/' + row.gameId);
   }
 
   addNewGame() {
