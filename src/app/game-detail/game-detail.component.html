@@ -9,6 +9,33 @@
 <mat-card class="mat-card-page">
 
 
+  <div *ngIf="!dataSource.rosterLockInd && !dataSource.invalidInd && !dataSource.finalInd">
+    <section class="example-section">
+      <div *ngIf="dataSource.heroNextPickInd"><p class="alert alert-success">
+      &nbsp;&nbsp;&nbsp;&nbsp;<mat-label>Hero Player has the next roster pick.  </mat-label></p></div>    
+    </section>
+  </div>
+  <div *ngIf="!dataSource.rosterLockInd && !dataSource.invalidInd && !dataSource.finalInd">
+    <section class="example-section">
+    <div *ngIf="dataSource.heroNextPickInd && dataSource.heroName == this.userName"><p class="alert alert-danger">
+      &nbsp;&nbsp;&nbsp;&nbsp;<mat-label>Click on the row in the roster you wish to assign an unassigned player to.  Assignments are final and cannot be edited!</mat-label></p></div>
+    </section>
+  </div>
+
+  <div *ngIf="!dataSource.rosterLockInd && !dataSource.invalidInd && !dataSource.finalInd">
+    <section class="example-section">
+      <div *ngIf="!dataSource.heroNextPickInd"><p class="alert alert-success">
+      &nbsp;&nbsp;&nbsp;&nbsp;<mat-label>Villain Player has the next roster pick.  </mat-label></p></div>
+    </section>
+  </div>
+
+  <div *ngIf="!dataSource.rosterLockInd && !dataSource.invalidInd && !dataSource.finalInd">
+    <section class="example-section"> 
+      <div *ngIf="!dataSource.heroNextPickInd && dataSource.villainName == this.userName"><p class="alert alert-danger">
+      &nbsp;&nbsp;&nbsp;&nbsp;<mat-label>Click on the row in the roster you wish to assign an unassigned player to.  Assignments are final and cannot be edited!</mat-label></p></div>
+    </section>
+  </div>
+
   <mat-form-field class="example-full-width">
       <mat-label>Game Name</mat-label>
       <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.description">
@@ -17,20 +44,76 @@
   <mat-form-field class="example-full-width">
     <mat-label>Scenario</mat-label>
     <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.scenario">
-</mat-form-field>
+  </mat-form-field>
 
-<mat-form-field class="example-full-width">
-  <mat-label>Hero Player</mat-label>
-  <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.heroName">
-</mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Hero Player</mat-label>
+    <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.heroName">
+  </mat-form-field>
 
-<mat-form-field class="example-full-width">
-<mat-label>Villain Player</mat-label>
-<input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.villainName">
-</mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Villain Player</mat-label>
+    <input matInput readonly placeholder="" maxlength="64" autocomplete="off" appBlockCopyPaste [(ngModel)]="dataSource.villainName">
+  </mat-form-field>
+
+  <section class="example-section">
+    &nbsp;
+    <mat-checkbox matInput class="example-margin" disabled="true" labelPosition="before" [(ngModel)]="dataSource.rosterLockInd">Roster Lock</mat-checkbox>
+    <mat-checkbox matInput class="example-margin" disabled="true" labelPosition="before" [(ngModel)]="dataSource.invalidInd" color="warn">Invalid</mat-checkbox>
+    <mat-checkbox matInput class="example-margin" disabled="true" labelPosition="before" [(ngModel)]="dataSource.finalInd">Scoring Final</mat-checkbox>
+  </section>
+
 
 </mat-card>
 </div>
+<br/>
+
+<table mat-table [dataSource]="rolesDataSource" class="mat-elevation-z8" #mytable>
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr class="RoleRow" mat-row *matRowDef="let  row; columns: columns;" (click)="editGame(row)"></tr> 
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let t"> {{ t.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef >Description</th>
+    <td mat-cell *matCellDef="let t">{{ t.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bHero">
+    <th mat-header-cell *matHeaderCellDef >Hero?</th>
+    <td mat-cell *matCellDef="let t">{{ t.bHero }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef >Position</th>
+    <td mat-cell *matCellDef="let t">{{ t.position }}</td>
+  </ng-container>
+  
+  <ng-container matColumnDef="imageURL">
+    <th mat-header-cell *matHeaderCellDef>Picture</th>
+    <td mat-cell *matCellDef="let element"> <img [src]="element.imageURL" height="80px"/> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nflName">
+    <th mat-header-cell *matHeaderCellDef>NFL Player</th>
+    <td mat-cell *matCellDef="let t"> {{ t.nflName }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nflImageURL">
+    <th mat-header-cell *matHeaderCellDef>NFL Picture</th>
+    <td mat-cell *matCellDef="let element"> <img [src]="element.nflImageURL" height="80px"/> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="team">
+    <th mat-header-cell *matHeaderCellDef>NFL Team</th>
+    <td mat-cell *matCellDef="let t"> {{ t.team }} </td>
+  </ng-container>
+
+</table>
+
+
 
 <p>
     <mat-accordion>

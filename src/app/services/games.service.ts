@@ -25,6 +25,14 @@ export class GamesService {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetGame?GameId="+GameId}`);
   }
 
+  public getScenarioPhaseRoles(ScenarioId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllScenarioPhaseRoles?scenarioId="+ScenarioId}`);
+  }
+
+  public getAllGameScenarioPhaseRoless(GameId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllGameScenarioPhaseRoles?gameId="+GameId}`);
+  }
+
   public getPlayers(): Observable<jwtAuth> {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllPlyrs"}`);
   }

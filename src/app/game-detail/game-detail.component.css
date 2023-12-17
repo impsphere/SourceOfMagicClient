@@ -25,3 +25,37 @@ mat-card-title{
   mat-raised-button  {
     margin-left: 10px;
   }
+
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+
+  
+  tr.RoleRow:hover {
+    background-color: #dca9fa;
+    cursor: pointer;
+  }
+
+  .alert-danger {
+    background-color: #f44336; /* Red */
+}
+.alert-success {
+    background-color: #f4f436;  
+} 
+.alert{
+    padding: 5px;
+    color: rgb(6, 6, 6);
+    margin-bottom: 5px;
+    text-align: center;
+}

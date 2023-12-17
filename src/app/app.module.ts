@@ -23,6 +23,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
 
@@ -61,7 +63,8 @@ import { GameNewComponent } from './game-new/game-new.component';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
