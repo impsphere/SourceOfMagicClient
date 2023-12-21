@@ -92,6 +92,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/gamedetail/' + row.gameId);
   }
 
+  Cancel() {
+    this.router.navigate(['gamelist']);
+  }
 }
 
 

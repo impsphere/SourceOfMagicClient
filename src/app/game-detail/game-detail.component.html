@@ -67,6 +67,8 @@
 </mat-card>
 </div>
 <br/>
+<button mat-raised-button color="primary" (click)="Cancel()">Return to Game List</button>
+<br/><br/>
 
 <table mat-table [dataSource]="rolesDataSource" class="mat-elevation-z8" #mytable>
   <tr mat-header-row *matHeaderRowDef="columns"></tr>
@@ -112,7 +114,6 @@
   </ng-container>
 
 </table>
-
 
 
 <p>
