@@ -33,6 +33,10 @@ export class GamesService {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllGameScenarioPhaseRoles?gameId="+GameId}`);
   }
 
+  public getScenarioPhaseRolePlayers(GameId:string, SprId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetScenarioPhaseRolePlayers?gameId="+GameId+"&sprId="+SprId}`);
+  }
+
   public getPlayers(): Observable<jwtAuth> {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllPlyrs"}`);
   }

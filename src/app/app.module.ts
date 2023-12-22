@@ -33,6 +33,7 @@ import { NFLPlayersComponent } from './nflplayers/nflplayers.component';
 import { GameDetailComponent } from './game-detail/game-detail.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameNewComponent } from './game-new/game-new.component';
+import { GameDetailDraftComponent } from './game-detail-draft/game-detail-draft.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GameNewComponent } from './game-new/game-new.component';
     NFLPlayersComponent,
     GameDetailComponent,
     GameListComponent,
-    GameNewComponent
+    GameNewComponent,
+    GameDetailDraftComponent
   ],
   imports: [
     BrowserModule,

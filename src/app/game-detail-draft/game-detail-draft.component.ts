@@ -8,45 +8,52 @@ import { Input } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { GamesService } from '../services/games.service';
 import { timer, Observable, Subscription } from 'rxjs';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-game-detail',
-  templateUrl: './game-detail.component.html',
-  styleUrls: ['./game-detail.component.css']
+  selector: 'app-game-detail-draft',
+  templateUrl: './game-detail-draft.component.html',
+  styleUrls: ['./game-detail-draft.component.css']
 })
-export class GameDetailComponent implements OnInit, OnDestroy {
-  panelOpenState: boolean;
+export class GameDetailDraftComponent {
+  panelOpenState: boolean = false;
   dataSource : any;
   rolesDataSource: any;
   isLoading = false;
   rolesLoading = false;
   @Input() id? = '';
+  @Input() sprid? = '';
   gameId : string = '';
+  scenarioPhaseRoleId: string = '';
   subscription!: Subscription;
   everyThirtySeconds: Observable<number> = timer(0, 30000);
-  columns: string[] = ['name', 'imageURL', 'description', 'bHero', 'position', 'nflName', 'nflImageURL', 'team'];
+  columns: string[] = ['name', 'headShotURL', 'team', 'position', 'playerProjection.fantasyPoints', 'injuryInfo', 'passYards', 'passTD', 'interceptions'
+  , 'rushYards', 'rushTD', 'recYards', 'recTD', 'nextGameTeam','timestamp'];
   userName: string = '';
+  dtPipe : DatePipe;
 
   constructor(private router: Router,
     public route: ActivatedRoute,
     private authService: AuthenticationService,
-    private gamesService: GamesService){
-      this.isLoading = true;
-      this.rolesLoading = true;
-      this.panelOpenState = false;
+    private gamesService: GamesService,
+    private datePipe: DatePipe){
+
+      this.dtPipe = datePipe;
+
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       
       this.gameId = params.get('id') ?? '';
-      console.log("Game detail: " + this.gameId)
-      //this.getGameData();
+      this.scenarioPhaseRoleId = params.get('sprid') ?? '';
+      console.log("Game detail (draft): " + this.gameId)
+      console.log("Game detail (draft) sprid: " + this.scenarioPhaseRoleId)
 
-      this.subscription = this.everyThirtySeconds.subscribe(() => {
-        this.getGameData();
-      });
+
+      //this.subscription = this.everyThirtySeconds.subscribe(() => {
+      //  this.getGameData();
+      //});
 
       this.authService.getUserName().subscribe(data => {  
  
@@ -55,46 +62,41 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         console.log("App component username:" + this.userName);
       }); 
 
+      this.dataSource = null;
+      this.isLoading = true;
+      this.gamesService.getScenarioPhaseRolePlayers(this.gameId, this.scenarioPhaseRoleId).subscribe({
+        next: (playersdata:any) => 
+        {
+         console.log(playersdata);
+        this.isLoading = false;
+        this.dataSource = playersdata;
+        }, 
+        error: err => {this.isLoading = false}
+      });
+
+
     })
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   }
+  
 
-  getGameData() {
-    this.gamesService.getGame(this.gameId).subscribe({
-      next: (gamesdata:any) => 
-      {
-      console.log(gamesdata);
-      this.isLoading = false;
-      this.dataSource = gamesdata;
-
-      this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
-        next: (rolesdata:any) => 
-        {
-          console.log(rolesdata);
-          this.rolesDataSource = rolesdata;
-          this.rolesLoading = false;
-        }, 
-        error: err => {this.rolesLoading = false
-        }})
-      }, 
-      error: err => {this.isLoading = false
-      }
-    });
-  }
 
   editGame(row: any) {
     //this.router.navigate(['/gamedetail'], {queryParams: {id: gameid}} );
     //this.router.navigate(['/gamedetail'], {queryParams: {id: row.gameId}} );
     console.log("List"+row.gameId)
-    this.router.navigateByUrl('/gamedetaildraft/' + this.gameId + '/' + row.scenarioPhaseRoleId);
+    this.router.navigateByUrl('/gamedetail/' + row.gameId);
+  }
+
+  draftPlayer(player: any) {
+    console.log(player);
   }
 
   Cancel() {
-    this.router.navigate(['gamelist']);
+    this.router.navigateByUrl('/gamedetail/' + this.gameId);
   }
+
 }
-
-
