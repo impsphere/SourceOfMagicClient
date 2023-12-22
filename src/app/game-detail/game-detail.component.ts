@@ -86,10 +86,35 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   }
 
   editGame(row: any) {
-    //this.router.navigate(['/gamedetail'], {queryParams: {id: gameid}} );
-    //this.router.navigate(['/gamedetail'], {queryParams: {id: row.gameId}} );
-    console.log("List"+row.gameId)
-    this.router.navigateByUrl('/gamedetaildraft/' + this.gameId + '/' + row.scenarioPhaseRoleId);
+
+    if (!this.dataSource.rosterLockInd && !this.dataSource.invalidInd && !this.dataSource.finalInd)
+    {
+
+      if (row.nflPlayerId == 0)
+      {
+
+        if ((this.dataSource.heroNextPickInd && this.dataSource.heroName == this.userName) || 
+        (!this.dataSource.heroNextPickInd && this.dataSource.villainName == this.userName))
+        {
+          if (((row.bHero) && this.dataSource.heroNextPickInd) || ((!row.bHero) && !this.dataSource.heroNextPickInd))
+          {
+            console.log("List"+row.gameId)
+            this.router.navigateByUrl('/gamedetaildraft/' + this.gameId + '/' + row.scenarioPhaseRoleId);
+          }
+          else {
+            console.log("Role selected does not align with player's faction.");
+          }
+        }
+        else{
+          console.log("Player does not have the next pick.");
+        }
+      } else {
+        console.log("This role has already been assigned a player.");
+      }
+
+    } else {
+      console.log("Game is roster locked, invalid or final.");
+    }
   }
 
   Cancel() {

@@ -12,6 +12,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DatePipe } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { gameAdd } from '../Models/gameAdd';
+import { Validators, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { FormGroup, FormControl, AbstractControl } from "@angular/forms";
 
 @Component({
   selector: 'app-game-new',
@@ -71,26 +73,43 @@ export class GameNewComponent {
 
   AddGame(gameDto: gameAdd) {
 
-    gameDto.HeroPlayerId = this.selectedHeroPlayerId;
-    gameDto.VillainPlayerId = this.selectedVillainPlayerId;
-    gameDto.ScenarioId = this.selectedScenarioId;
-    console.log(gameDto);
+    if (!this.newGameForm.invalid)
+    {
+      gameDto.HeroPlayerId = this.selectedHeroPlayerId;
+      gameDto.VillainPlayerId = this.selectedVillainPlayerId;
+      gameDto.ScenarioId = this.selectedScenarioId;
+      console.log(gameDto);
 
-    this.gamesService.addGame(gameDto).subscribe({
-      next: (gameDto) => 
-      {
-        this.router.navigate(['gamelist'])
-      },
-      error: err => 
-      {
-        console.log("This is an error creating game:", err)
-      }
-    });
-
+      this.gamesService.addGame(gameDto).subscribe({
+        next: (gameDto) => 
+        {
+          this.router.navigate(['gamelist'])
+        },
+        error: err => 
+        {
+          console.log("This is an error creating game:", err)
+        }
+      });
+    }
   }
 
   Cancel() {
     this.router.navigate(['gamelist']);
   }
+
+  newGameForm = new FormGroup({
+    Description: new FormControl("", [
+      Validators.required
+    ]),
+    HeroPlayer: new FormControl("", [
+      Validators.required
+    ]),
+    VillainPlayer: new FormControl("", [
+      Validators.required
+    ]),
+    Scenario: new FormControl("", [
+      Validators.required
+    ])
+  });
 
 }

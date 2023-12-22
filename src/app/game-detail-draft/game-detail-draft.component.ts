@@ -9,6 +9,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { GamesService } from '../services/games.service';
 import { timer, Observable, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { rolePlayerAdd } from '../Models/rolePlayerAdd';
 
 @Component({
   selector: 'app-game-detail-draft',
@@ -29,8 +30,12 @@ export class GameDetailDraftComponent {
   everyThirtySeconds: Observable<number> = timer(0, 30000);
   columns: string[] = ['name', 'headShotURL', 'team', 'position', 'playerProjection.fantasyPoints', 'injuryInfo', 'passYards', 'passTD', 'interceptions'
   , 'rushYards', 'rushTD', 'recYards', 'recTD', 'nextGameTeam','timestamp'];
+  rolecolumns: string[] = ['name', 'imageURL', 'description', 'bHero', 'position'];
   userName: string = '';
   dtPipe : DatePipe;
+  
+  rpAdd = new rolePlayerAdd();
+ 
 
   constructor(private router: Router,
     public route: ActivatedRoute,
@@ -64,17 +69,25 @@ export class GameDetailDraftComponent {
 
       this.dataSource = null;
       this.isLoading = true;
-      this.gamesService.getScenarioPhaseRolePlayers(this.gameId, this.scenarioPhaseRoleId).subscribe({
-        next: (playersdata:any) => 
+
+      this.gamesService.getScenarioPhaseRole(this.scenarioPhaseRoleId).subscribe({
+        next: (roledata:any) => 
         {
-         console.log(playersdata);
-        this.isLoading = false;
-        this.dataSource = playersdata;
+          console.log(roledata);
+          this.rolesDataSource = roledata;
         }, 
         error: err => {this.isLoading = false}
       });
 
-
+      this.gamesService.getScenarioPhaseRolePlayers(this.gameId, this.scenarioPhaseRoleId).subscribe({
+        next: (playersdata:any) => 
+        {
+          console.log(playersdata);
+          this.isLoading = false;
+          this.dataSource = playersdata;
+        }, 
+        error: err => {this.isLoading = false}
+      });
     })
   }
 
@@ -92,7 +105,25 @@ export class GameDetailDraftComponent {
   }
 
   draftPlayer(player: any) {
-    console.log(player);
+
+    this.rpAdd.gameId = parseInt(this.gameId);
+    this.rpAdd.nflPlayerId = player.nflPlayerId;
+    this.rpAdd.scenarioPhaseRoleId = parseInt(this.scenarioPhaseRoleId);
+
+    console.log(this.rpAdd);
+
+    this.gamesService.addRolePlayer(this.rpAdd).subscribe({
+      next: (gameDto) => 
+      {
+        this.router.navigateByUrl('/gamedetail/' + this.gameId);
+      },
+      error: err => 
+      {
+        console.log("This is an error assigning this player to the game:", err)
+      }
+    });
+  
+    
   }
 
   Cancel() {

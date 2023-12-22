@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.development';
 import { jwtAuth } from '../Models/jwtAuth';
 import { gameAdd } from '../Models/gameAdd';
+import { rolePlayerAdd } from '../Models/rolePlayerAdd';
 import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 import {of} from 'rxjs';
 
@@ -37,6 +38,10 @@ export class GamesService {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetScenarioPhaseRolePlayers?gameId="+GameId+"&sprId="+SprId}`);
   }
 
+  public getScenarioPhaseRole(SprId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetScenarioPhaseRole?sprId="+SprId}`);
+  }
+
   public getPlayers(): Observable<jwtAuth> {
     return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetAllPlyrs"}`);
   }
@@ -48,6 +53,11 @@ export class GamesService {
   public addGame(game: gameAdd): Observable<jwtAuth> {
     return this.http.post<jwtAuth>(`${environment.apiUrl}${this.gamesUrl+"AddGame"}`, game).pipe(catchError(this.errorHandler))
   }
+
+  public addRolePlayer(plyr: rolePlayerAdd): Observable<jwtAuth> {
+    return this.http.post<jwtAuth>(`${environment.apiUrl}${this.gamesUrl+"AddGameScenarioNFLPlayer"}`, plyr).pipe(catchError(this.errorHandler))
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(() => new Error(error.error));
   }
