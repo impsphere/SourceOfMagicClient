@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,12 +8,21 @@ import { Input } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { GamesService } from '../services/games.service';
 import { timer, Observable, Subscription } from 'rxjs';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 
+ // Nested results tables
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  styleUrls: ['./game-detail.component.css']
+  styleUrls: ['./game-detail.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),],
 })
 export class GameDetailComponent implements OnInit, OnDestroy {
   panelOpenState: boolean;
@@ -24,14 +33,22 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   @Input() id? = '';
   gameId : string = '';
   subscription!: Subscription;
-  everyThirtySeconds: Observable<number> = timer(0, 30000);
+  everyThirtySeconds: Observable<number> = timer(0, 3000000);  //WHADIAG
   columns: string[] = ['name', 'imageURL', 'description', 'bHero', 'position', 'nflName', 'nflImageURL', 'team'];
   userName: string = '';
+
+  // Nested results tables
+  scoreDataSource: any;
+  scoreColumns: string[] = ['imageURL', 'description', 'heroScore', 'villainScore'];
+  expandedElement: any | null;
+  innerDisplayedColumns = ['imageURL', 'name', 'bHero', 'headShotURL', 'nflName', 'position', 'team', 'phaseRoleMessage'];
+  phaseData: Phase[] = [];
 
   constructor(private router: Router,
     public route: ActivatedRoute,
     private authService: AuthenticationService,
-    private gamesService: GamesService){
+    private gamesService: GamesService,
+    private cd: ChangeDetectorRef){
       this.isLoading = true;
       this.rolesLoading = true;
       this.panelOpenState = false;
@@ -62,26 +79,57 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  toggleRow(element: any) {
+    element.roles && element.roles.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
+    this.cd.detectChanges();
+  }
+
   getGameData() {
     this.gamesService.getGame(this.gameId).subscribe({
       next: (gamesdata:any) => 
       {
-      console.log(gamesdata);
-      this.isLoading = false;
-      this.dataSource = gamesdata;
+        console.log(gamesdata);
+        this.isLoading = false;
+        this.dataSource = gamesdata;
 
-      this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
-        next: (rolesdata:any) => 
-        {
-          console.log(rolesdata);
-          this.rolesDataSource = rolesdata;
-          this.rolesLoading = false;
-        }, 
-        error: err => {this.rolesLoading = false
-        }})
+        this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
+          next: (rolesdata:any) => 
+          {
+            console.log(rolesdata);
+            this.rolesDataSource = rolesdata;
+            this.rolesLoading = false;
+          }, 
+          error: err => {this.rolesLoading = false
+          }})
+
+        this.gamesService.getGameScoring(this.gameId).subscribe({
+          next: (scoredata:any) => 
+          {
+            console.log(scoredata);
+
+            this.scoreDataSource = scoredata;
+            this.rolesLoading = false;
+          }, 
+          error: err => {this.rolesLoading = false
+          }})
+
+/* 
+          this.scoreDataSource.forEach(p => {
+            if (p.roles && Array.isArray(p.roles) && p.roles.length) {
+              this.phaseData = [...this.phaseData, {...p, roles: new MatTableDataSource(p.roles)}];
+            } else {
+              this.phaseData = [...this.phaseData, p];
+            }
+          });
+
+          this.scoreDataSource = new MatTableDataSource(this.phaseData);
+ */
       }, 
       error: err => {this.isLoading = false
       }
+
+
+      
     });
   }
 
@@ -123,3 +171,21 @@ export class GameDetailComponent implements OnInit, OnDestroy {
 }
 
 
+export interface Phase {
+  imageURL: string;
+  description: string;
+  heroScore: string;
+  villainScore: string;
+  roles?: Role[] | MatTableDataSource<Role>;
+}
+
+export interface Role {
+  imageURL: string;
+  name: string;
+  bHero: boolean;
+  headShotURL: string;
+  nflName: string;
+  position: string;
+  team: string;
+  phaseRoleMessage: string;
+}

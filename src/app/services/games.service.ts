@@ -58,6 +58,10 @@ export class GamesService {
     return this.http.post<jwtAuth>(`${environment.apiUrl}${this.gamesUrl+"AddGameScenarioNFLPlayer"}`, plyr).pipe(catchError(this.errorHandler))
   }
 
+  public getGameScoring(GameId:string): Observable<jwtAuth> {
+    return this.http.get<any>(`${environment.apiUrl}${this.gamesUrl+"GetGameScoring?gameId="+GameId}`);
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(() => new Error(error.error));
   }

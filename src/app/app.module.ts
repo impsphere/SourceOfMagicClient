@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthenticationInterceptor } from './services/interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './auth.guard';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
