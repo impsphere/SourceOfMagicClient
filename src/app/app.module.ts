@@ -35,6 +35,7 @@ import { GameDetailComponent } from './game-detail/game-detail.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameNewComponent } from './game-new/game-new.component';
 import { GameDetailDraftComponent } from './game-detail-draft/game-detail-draft.component';
+import { GameDetailScoreComponent } from './game-detail-score/game-detail-score.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GameDetailDraftComponent } from './game-detail-draft/game-detail-draft.
     GameDetailComponent,
     GameListComponent,
     GameNewComponent,
-    GameDetailDraftComponent
+    GameDetailDraftComponent,
+    GameDetailScoreComponent
   ],
   imports: [
     BrowserModule,

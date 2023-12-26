@@ -11,12 +11,12 @@ import { timer, Observable, Subscription } from 'rxjs';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 
  // Nested results tables
-import { animate, state, style, transition, trigger } from '@angular/animations';
+ import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-game-detail',
-  templateUrl: './game-detail.component.html',
-  styleUrls: ['./game-detail.component.css'],
+  selector: 'app-game-detail-score',
+  templateUrl: './game-detail-score.component.html',
+  styleUrls: ['./game-detail-score.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -24,7 +24,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),],
 })
-export class GameDetailComponent implements OnInit, OnDestroy {
+export class GameDetailScoreComponent {
   panelOpenState: boolean;
   dataSource : any;
   rolesDataSource: any;
@@ -61,9 +61,9 @@ export class GameDetailComponent implements OnInit, OnDestroy {
       console.log("Game detail: " + this.gameId)
       //this.getGameData();
 
-      this.subscription = this.everyThirtySeconds.subscribe(() => {
+      //this.subscription = this.everyThirtySeconds.subscribe(() => {
         this.getGameData();
-      });
+      //});
 
       this.authService.getUserName().subscribe(data => {  
  
@@ -75,9 +75,6 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
   toggleRow(element: any) {
     element.roles && element.roles.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
@@ -92,7 +89,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.dataSource = gamesdata;
 
-        this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
+/*         this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
           next: (rolesdata:any) => 
           {
             console.log(rolesdata);
@@ -100,8 +97,8 @@ export class GameDetailComponent implements OnInit, OnDestroy {
             this.rolesLoading = false;
           }, 
           error: err => {this.rolesLoading = false
-          }})
-/* 
+          }}) */
+
         this.gamesService.getGameScoring(this.gameId).subscribe({
           next: (scoredata:any) => 
           {
@@ -111,8 +108,19 @@ export class GameDetailComponent implements OnInit, OnDestroy {
             this.rolesLoading = false;
           }, 
           error: err => {this.rolesLoading = false
-          }}) */
+          }})
 
+/* 
+          this.scoreDataSource.forEach(p => {
+            if (p.roles && Array.isArray(p.roles) && p.roles.length) {
+              this.phaseData = [...this.phaseData, {...p, roles: new MatTableDataSource(p.roles)}];
+            } else {
+              this.phaseData = [...this.phaseData, p];
+            }
+          });
+
+          this.scoreDataSource = new MatTableDataSource(this.phaseData);
+ */
       }, 
       error: err => {this.isLoading = false
       }
@@ -122,45 +130,10 @@ export class GameDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  editGame(row: any) {
-
-    if (!this.dataSource.rosterLockInd && !this.dataSource.invalidInd && !this.dataSource.finalInd)
-    {
-
-      if (row.nflPlayerId == 0)
-      {
-
-        if ((this.dataSource.heroNextPickInd && this.dataSource.heroName == this.userName) || 
-        (!this.dataSource.heroNextPickInd && this.dataSource.villainName == this.userName))
-        {
-          if (((row.bHero) && this.dataSource.heroNextPickInd) || ((!row.bHero) && !this.dataSource.heroNextPickInd))
-          {
-            console.log("List"+row.gameId)
-            this.router.navigateByUrl('/gamedetaildraft/' + this.gameId + '/' + row.scenarioPhaseRoleId);
-          }
-          else {
-            console.log("Role selected does not align with player's faction.");
-          }
-        }
-        else{
-          console.log("Player does not have the next pick.");
-        }
-      } else {
-        console.log("This role has already been assigned a player.");
-      }
-
-    } else {
-      console.log("Game is roster locked, invalid or final.");
-    }
-  }
-
   Cancel() {
     this.router.navigate(['gamelist']);
   }
 
-  Scoring() {
-    this.router.navigateByUrl('/gamedetailscore/' + this.gameId);
-  }
 }
 
 

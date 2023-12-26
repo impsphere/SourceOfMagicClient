@@ -1,0 +1,121 @@
+mat-card-title{
+    background-color:rgb(163, 159, 160) !important;
+    padding:5px !important;
+  }
+  
+  mat-card-subtitle{
+    background-color:rgb(133, 118, 150) !important;
+    padding:5px !important;
+  }
+
+  .mat-card-page{
+    padding:0 !important;
+    width: 640px;
+  }
+  
+  .mat-card-content{
+    padding:5px !important;
+  }
+
+  tr.NFLPlayerRow:hover {
+    background-color: #dca9fa;
+    cursor: pointer;
+  }
+
+  mat-raised-button  {
+    margin-left: 10px;
+  }
+
+  .example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+
+  
+  tr.RoleRow:hover {
+    background-color: #dca9fa;
+    cursor: pointer;
+  }
+
+  .alert-danger {
+    background-color: #f44336; /* Red */
+}
+.alert-success {
+    background-color: #f4f436;  
+} 
+.alert{
+    padding: 5px;
+    color: rgb(6, 6, 6);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+
+table {
+    width: 100%;
+  }
+  
+
+tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: #dca9fa;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    padding: 16px;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+  
+  .inner-table {
+    width: 100%;
+  }
+  
+  .inner-table mat-form-field {
+    margin-top: 15px;
+    width: 100%;
+  }
+  

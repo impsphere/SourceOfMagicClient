@@ -8,6 +8,7 @@ import { GameDetailComponent } from './game-detail/game-detail.component';
 import { GameDetailDraftComponent } from './game-detail-draft/game-detail-draft.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameNewComponent } from './game-new/game-new.component';
+import { GameDetailScoreComponent } from './game-detail-score/game-detail-score.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'nflplayers', component: NFLPlayersComponent, canActivate: [AuthGuard] },
   {path: 'gamedetail/:id', component: GameDetailComponent, canActivate: [AuthGuard] },
   {path: 'gamedetaildraft/:id/:sprid', component: GameDetailDraftComponent, canActivate: [AuthGuard] },
+  {path: 'gamedetailscore/:id', component: GameDetailScoreComponent, canActivate: [AuthGuard] },
   {path: 'gamelist', component: GameListComponent, canActivate: [AuthGuard] },
   {path: 'gamenew', component: GameNewComponent, canActivate: [AuthGuard] },
   {path: 'loginreg', component: LoginRegComponent }
