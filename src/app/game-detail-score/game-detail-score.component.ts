@@ -86,7 +86,7 @@ export class GameDetailScoreComponent {
       next: (gamesdata:any) => 
       {
         console.log(gamesdata);
-        this.isLoading = false;
+        
         this.dataSource = gamesdata;
 
 /*         this.gamesService.getAllGameScenarioPhaseRoless(this.gameId).subscribe({
@@ -106,6 +106,7 @@ export class GameDetailScoreComponent {
 
             this.scoreDataSource = scoredata;
             this.rolesLoading = false;
+            this.isLoading = false;
           }, 
           error: err => {this.rolesLoading = false
           }})
