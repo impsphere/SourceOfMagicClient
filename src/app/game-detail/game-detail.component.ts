@@ -33,7 +33,7 @@ export class GameDetailComponent implements OnInit, OnDestroy {
   @Input() id? = '';
   gameId : string = '';
   subscription!: Subscription;
-  everyThirtySeconds: Observable<number> = timer(0, 3000000);  //WHADIAG
+  everyThirtySeconds: Observable<number> = timer(0, 45000);  //WHADIAG
   columns: string[] = ['name', 'imageURL', 'description', 'bHero', 'position', 'nflName', 'nflImageURL', 'team'];
   userName: string = '';
 
