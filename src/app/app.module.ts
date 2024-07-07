@@ -25,6 +25,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { LoginRegComponent } from './User/login-reg/login-reg.component';
 import { HomeComponent } from './home/home.component';
@@ -69,7 +70,8 @@ import { GameDetailScoreComponent } from './game-detail-score/game-detail-score.
     MatExpansionModule,
     MatGridListModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

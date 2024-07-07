@@ -49,7 +49,7 @@
 <button mat-raised-button color="primary" (click)="Cancel()">Return to Game List</button>
 <br/><br/>
 
-<table mat-table [dataSource]="scoreDataSource" multiTemplateDataRows class="mat-elevation-z8" matSort>
+<table mat-table [dataSource]="scoreDataSource" multiTemplateDataRows class="mat-elevation-z8" matSort style="max-width:1000px;">
 	<!--ng-container matColumnDef="{{column}}" *ngFor="let column of scoreColumns"-->
 		<!--th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th-->
 		<!--td mat-cell *matCellDef="let element"> {{element[column]}} </td-->
@@ -57,26 +57,29 @@
 
   <ng-container matColumnDef="imageURL">
     <th mat-header-cell *matHeaderCellDef>Phase Picture</th>
-    <td mat-cell *matCellDef="let element"> <img [src]="element.imageURL" height="120px"/> </td>
-  </ng-container>
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef >Description (click for detail)</th>
-    <td mat-cell *matCellDef="let t">{{ t.description }}</td>
+    <td mat-cell *matCellDef="let element" style="background:rgb(244, 200, 244);"> <img [src]="element.imageURL" height="120px"/> </td>
   </ng-container>
   <ng-container matColumnDef="heroScore">
-    <th mat-header-cell *matHeaderCellDef >Hero Score</th>
-    <td mat-cell *matCellDef="let t">{{ t.heroScore }}</td>
+    <th mat-header-cell *matHeaderCellDef >Hero Bonus / Score</th>
+    <td mat-cell *matCellDef="let t" style="background:rgb(244, 200, 244);font-size:24px">{{ t.heroScore }}</td>
   </ng-container>
   <ng-container matColumnDef="villainScore">
-    <th mat-header-cell *matHeaderCellDef >Villain Score</th>
-    <td mat-cell *matCellDef="let t">{{ t.villainScore }}</td>
+    <th mat-header-cell *matHeaderCellDef >Villain Bonus / Score</th>
+    <td mat-cell *matCellDef="let t" style="background:rgb(244, 200, 244);font-size:24px">{{ t.villainScore }}</td>
   </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef >Phase Description (Resolution Details: Green pills = Good effects, Red pills = Evil effects, Gray pills = Info)</th>
+    <td mat-cell *matCellDef="let t" style="background:rgb(244, 200, 244);max-width:40%;">{{ t.description }}</td>
+  </ng-container>
+
 
 	<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
 	<ng-container matColumnDef="expandedDetail">
 		<td mat-cell *matCellDef="let element" [attr.colspan]="scoreColumns.length">
-			<div class="example-element-detail" *ngIf="element.roles?.length" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-				<div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+			<!--div class="example-element-detail" *ngIf="element.roles?.length" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+				<div class="inner-table mat-elevation-z8" *ngIf="expandedElement"-->
+      <div class="example-element-detail">
+        <div class="inner-table mat-elevation-z8" >
           <table #innerTables mat-table [dataSource]="element.roles" matSort>
             <!--ng-container matColumnDef="{{innerColumn}}" *ngFor="let innerColumn of innerDisplayedColumns">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn}} </th>
@@ -112,8 +115,50 @@
               <td mat-cell *matCellDef="let t">{{ t.team }}</td>
             </ng-container>
             <ng-container matColumnDef="phaseRoleMessage">
-              <th mat-header-cell *matHeaderCellDef >Resolution</th>
-              <td mat-cell *matCellDef="let t">{{ t.phaseRoleMessage }}</td>
+              <th mat-header-cell *matHeaderCellDef  style="width:100%">Resolution</th>
+
+              <!--td mat-cell *matCellDef="let t">
+                       <mat-chip style="--mdc-chip-elevated-container-color: #f64444;">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M762-96 645-212l-88 88-28-28q-23-23-23-57t23-57l169-169q23-23 57-23t57 23l28 28-88 88 116 117q12 12 12 28t-12 28l-50 50q-12 12-28 12t-28-12Zm118-628L426-270l5 4q23 23 23 57t-23 57l-28 28-88-88L198-96q-12 12-28 12t-28-12l-50-50q-12-12-12-28t12-28l116-117-88-88 28-28q23-23 57-23t57 23l4 5 454-454h160v160ZM334-583l24-23 23-24-23 24-24 23Zm-56 57L80-724v-160h160l198 198-57 56-174-174h-47v47l174 174-56 57Zm92 199 430-430v-47h-47L323-374l47 47Zm0 0-24-23-23-24 23 24 24 23Z"/></svg>
+                        {{t.phaseRoleMessage}} </mat-chip>
+
+              </td-->
+
+              <td mat-cell *matCellDef="let t" class="chiplist">
+                <mat-chip-set class="mat-mdc-chip-set-stacked" aria-orientation="vertical">
+                <ng-container *ngFor="let phMessage of t.phaseRoleMessage">
+                       
+                        <ng-template [ngIf]="phMessage.indexOf('-') == 0">
+                          <mat-chip style="--mdc-chip-elevated-container-color: #f64444;">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M762-96 645-212l-88 88-28-28q-23-23-23-57t23-57l169-169q23-23 57-23t57 23l28 28-88 88 116 117q12 12 12 28t-12 28l-50 50q-12 12-28 12t-28-12Zm118-628L426-270l5 4q23 23 23 57t-23 57l-28 28-88-88L198-96q-12 12-28 12t-28-12l-50-50q-12-12-12-28t12-28l116-117-88-88 28-28q23-23 57-23t57 23l4 5 454-454h160v160ZM334-583l24-23 23-24-23 24-24 23Zm-56 57L80-724v-160h160l198 198-57 56-174-174h-47v47l174 174-56 57Zm92 199 430-430v-47h-47L323-374l47 47Zm0 0-24-23-23-24 23 24 24 23Z"/></svg>
+                          {{phMessage.substring(1)}} 
+                        </mat-chip>
+                        </ng-template>
+
+                        <ng-template [ngIf]="phMessage.indexOf('+') == 0">
+                          <mat-chip style="--mdc-chip-elevated-container-color: #91ee95;">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M440-501Zm0 381L313-234q-72-65-123.5-116t-85-96q-33.5-45-49-87T40-621q0-94 63-156.5T260-840q52 0 99 22t81 62q34-40 81-62t99-22q81 0 136 45.5T831-680h-85q-18-40-53-60t-73-20q-51 0-88 27.5T463-660h-46q-31-45-70.5-72.5T260-760q-57 0-98.5 39.5T120-621q0 33 14 67t50 78.5q36 44.5 98 104T440-228q26-23 61-53t56-50l9 9 19.5 19.5L605-283l9 9q-22 20-56 49.5T498-172l-58 52Zm280-160v-120H600v-80h120v-120h80v120h120v80H800v120h-80Z"/></svg>
+                          {{phMessage.substring(1)}} 
+                        </mat-chip>
+                        </ng-template>
+
+                        <ng-template [ngIf]="phMessage.indexOf('_') == 0">
+                          <mat-chip style="--mdc-chip-elevated-container-color: #b0b5b0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-480ZM362-202 202-362q-3 38-1.5 79t7.5 73q23 7 69.5 9t84.5-1Zm96-16q59-13 106-37t82-59q34-34 58-80.5T742-500L500-742q-57 14-103 38.5T316-644q-35 35-59.5 81.5T218-458l240 240Zm-62-122-56-56 224-224 56 56-224 224Zm362-256q4-39 2.5-81t-8.5-73q-23-8-69.5-10t-84.5 2l160 162ZM310-120q-57 0-104-8.5T148-148q-11-12-19.5-60T120-314q0-119 36-220.5T258-702q66-66 169-102t223-36q58 0 104.5 8.5T812-812q11 12 19.5 60t8.5 108q0 117-36 218.5T702-258q-65 65-168 101.5T310-120Z"/></svg>
+                          {{phMessage.substring(1)}} 
+                        </mat-chip>
+                        </ng-template>
+
+                </ng-container>
+              </mat-chip-set>
+              </td>
+
+              <!--mat-chip-set>
+                <span *ngFor="let t">
+                     <mat-chip>{{t.phaseRoleMessage}} </mat-chip>
+                 </span>
+              </mat-chip-set-->
+
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>

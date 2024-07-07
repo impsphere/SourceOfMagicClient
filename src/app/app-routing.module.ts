@@ -11,6 +11,7 @@ import { GameNewComponent } from './game-new/game-new.component';
 import { GameDetailScoreComponent } from './game-detail-score/game-detail-score.component';
 
 
+
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },

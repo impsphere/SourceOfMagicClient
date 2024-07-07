@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ViewChild } from '@angular/core';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule} from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
  
 
